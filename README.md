@@ -23,7 +23,7 @@ A hardware and software project for those who work in an open office and need a 
 Build
 -----
 
-| Trinket Front | Trinket Back |
+| Trinket M0 Front | Trinket M0 Back |
 | :-----------: | :----------: |
 | ![](assets/IMG_0842.JPG) | ![](assets/IMG_7806.JPG) |
 
@@ -50,21 +50,30 @@ Setup
 
 ### Hardware:
 
- - circuitpython 4 firmware
-cp bits to device
+1. Build the hardware, see above
+2. Upload CircuitPython 4.X firmware to device
+   - Download the latest from [here](https://github.com/adafruit/circuitpython/releases<Paste>), it's a large page... search for 'trinket_m0-en_US'
+   - Plug in and backup any existing projects on your Trinket M0
+   - Double click the Trinket's reset button to enter bootloader mode, the red light will flash and a new drive titled TRINKETBOOT will be mounted
+   - Place the downloaded UF2 file into this newly mounted drive, it will automatically be applied and the device will reset
+3. Upload CIRCUITPY contents to device
+   - Once the firmware is done and the device has reset you'll see a CIRCUITPY device mounted, copy the CIRCUITPY contents of this repository to the newly mounted drive, that's it!
 
 ### Slack:
 
+1. Create a legacy Token
+2. Get your ID
+
 ### Server:
 
-__python__
+1. Grab dependencies
 
-    pip3 install pyserial slackclient==2.0.0
+        go get github.com/tarm/serial
+        go get github.com/nlopes/slack
 
-__go__
-
-    go get github.com/tarm/serial
-    go get github.com/nlopes/slack
+2. Add Slack legacy token and user ID to server/go/main.go
+3. Compile the application
+4. Create a local service so it runs automatically at boot
 
 Develop
 -------
@@ -73,13 +82,12 @@ You'll want:
 
 - a serial terminal emulator
 - your favorite text editor
+- a slack api
 - ...
 
 References
 ----------
 
-License
--------
 
 Colophon
 --------
