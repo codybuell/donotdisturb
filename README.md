@@ -8,7 +8,7 @@ A hardware and software project for those who work in an open office and need a 
 | Light Color | Light Behavior | Slack Status Text | Slack Status Emoji | Other |
 | :---------- | :------------- | :---------------- | :----------------- | :---- |
 | blue    | solid   | - | - | server has not connected to trinket |
-| red     | solid   | 'focused' | - | |
+| red     | solid   | 'focused', 'busy' | - | |
 | red     | solid   | - | :triangular_flag_on_post:, :red_circle:, :woman-gesturing-no:, :man-gesturing-no:, :male-technologist:, :female-technologist: | |
 | red     | pulsing | 'in a meeting', 'on a call' | - | |
 | red     | pulsing | - | :middle_finger: | |
