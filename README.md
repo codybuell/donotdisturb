@@ -1,9 +1,24 @@
 Do Not Disturb
 ==============
 
-For those who work in an open office and need a better way than headphones to indicate availability.  The light ties to Slack statuses to tell them how wary they should be to approach you.  There will be some soldering involved, and although this can be done on any OS we'll assume OSX here.
+A hardware and software project for those who work in an open office and need a better way than headphones to indicate availability.  The light ties to Slack statuses to tell others how wary they should be to approach you.  There will be some soldering involved, and although this can be done on any OS we'll assume OSX here.
 
 ![](assets/IMG_6796.JPG)
+
+| Light Color | Light Behavior | Slack Status Text | Slack Status Emoji | Other |
+| :---------- | :------------- | :---------------- | :----------------- | :---- |
+| blue    | solid   | - | - | server has not connected to trinket |
+| red     | solid   | 'focused' | - | |
+| red     | solid   | - | :triangular_flag_on_post:, :red_circle:, :woman-gesturing-no:, :man-gesturing-no:, :male-technologist:, :female-technologist: | |
+| red     | pulsing | 'in a meeting', 'on a call' | - | |
+| red     | pulsing | - | :middle_finger: | |
+| green   | solid   | __default__ | __default__ | If there is no status or one we don't trigger on the light will default green. |
+| green   | pulsing | - | - | - |
+| yellow  | solid   | 'thinking' | - | |
+| yellow  | solid   | - | :thinking_face:, :sleeping:, :shushing_face: | |
+| yellow  | pulsing | - | - | - |
+
+* If there is Status Text then we ignore the Status Emoji, only if there is no Status Text do we set the light based on Status Emoji.
 
 Build
 -----
@@ -23,6 +38,8 @@ Build
 | [10K Ω Resistor (1206 SMD)](https://www.mouser.com/Passive-Components/Resistors/SMD-Resistors-Chip-Resistors/_/N-7h7yu?P=1z0x6frZ1yzmotyZ1yzmno7) | 1 | ~$0.15 |
 | [MicroUSB Data Cable](https://www.amazon.com/dp/B0711PVX6Z/ref=cm_sw_em_r_mt_dp_U_NwJdDb4PMCY4R) | 1 | ~$5 |
 | [30AWG Stranded-Core Wire (black)](https://www.adafruit.com/product/3164) | 1 inch | ~$5 |
+
+### Wiring
 
 ### Tips
 
