@@ -134,7 +134,9 @@ func main() {
 		case *slack.UserChangeEvent:
 			fmt.Printf("%T\n", ev)
 			//fmt.Printf("EventVals: %+v\n", ev)
-			setLightStatus(stream, strings.ToLower(ev.User.Profile.StatusText), ev.User.Profile.StatusEmoji)
+			if ev.User.ID == slackUserID {
+				setLightStatus(stream, strings.ToLower(ev.User.Profile.StatusText), ev.User.Profile.StatusEmoji)
+			}
 		default:
 			fmt.Printf("%T\n", ev)
 		}
