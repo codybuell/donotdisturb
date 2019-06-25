@@ -74,7 +74,7 @@ func setLightStatus(stream *serial.Port, statusText string, statusEmoji string) 
 		case ":middle_finger:":
 			color = "red"
 			mode = "@pulse"
-		case ":red_circle:", ":woman-gesturing-no:", ":man-gesturing-no:", ":male-technologist:", ":female-technologist:":
+		case ":triangular_flag_on_post:", ":red_circle:", ":woman-gesturing-no:", ":man-gesturing-no:", ":male-technologist:", ":female-technologist:":
 			color = "red"
 			mode = "@solid"
 		case ":thinking_face:", ":sleeping:", ":shushing_face:":
