@@ -13,8 +13,8 @@ import (
 )
 
 const (
-	slackUserID      = "UCRP0RS8H"
-	slackLegacyToken = "xoxp-420969448000-433782876289-459217447138-f9e84c14e73c035385426d60ea028e57"
+	slackUserID      = "YOURUSERID"
+	slackLegacyToken = "YOURLEGACYTOKEN"
 )
 
 func initializePort(path string) *serial.Port {
@@ -87,7 +87,7 @@ func setLightStatus(stream *serial.Port, statusText string, statusEmoji string) 
 		case "in a meeting", "on a call":
 			color = "red"
 			mode = "@pulse"
-		case "focused":
+		case "focused", "busy":
 			color = "red"
 			mode = "@solid"
 		case "thinking":
