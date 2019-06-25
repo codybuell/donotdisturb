@@ -31,14 +31,23 @@ We can't control the 'on' led, it will always be green, it will always be on and
 Setup
 -----
 
-hardware:
-circuitpython 4 firmware
+### Hardware:
+
+ - circuitpython 4 firmware
 cp bits to device
 
-slack:
+### Slack:
 
-server:
+### Server:
 
+__python__
+
+    pip3 install pyserial slackclient==2.0.0
+
+__go__
+
+    go get github.com/tarm/serial
+    go get github.com/nlopes/slack
 
 Develop
 -------
