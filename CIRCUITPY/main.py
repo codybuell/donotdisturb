@@ -84,9 +84,9 @@ mode = "solid"
 luminosity, pulseTimeout = setLuminosity()
 oldluminosity = luminosity
 
-# default to a green
-color = (0,luminosity,0)
-colorName = 'green'
+# default to a yellow to indicate we haven't received anything from the server
+color = (0,0,luminosity)
+colorName = 'blue'
 setColor(color)
 
 ##################
@@ -131,6 +131,13 @@ while True:
             colorName = 'yellow'
             if (mode == "pulse"):
                 mode = "solid"
+        elif (command.lower().startswith('blue')):
+            color = (0,0,luminosity)
+            colorName = 'blue'
+            if (mode == "pulse"):
+                mode = "solid"
+        elif (command.lower().startswith('hey')):
+            print('go away')
         print('setting',mode,'-',color)
 
     # apply the color
