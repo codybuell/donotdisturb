@@ -16,3 +16,5 @@ Thumbs.db
 # Repository Specific #
 #######################
 
+server/go/config.go
+server/go/go

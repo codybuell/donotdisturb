@@ -5,18 +5,16 @@ A hardware and software project for those who work in an open office and need a 
 
 ![](assets/IMG_6796.JPG)
 
-| Light Color | Light Behavior | Slack Status Text | Slack Status Emoji | Other |
-| :---------- | :------------- | :---------------- | :----------------- | :---- |
-| blue    | solid   | - | - | server has not connected to trinket |
-| red     | solid   | 'focused', 'busy' | - | |
-| red     | solid   | - | :triangular_flag_on_post:, :red_circle:, :woman-gesturing-no:, :man-gesturing-no:, :male-technologist:, :female-technologist: | |
-| red     | pulsing | 'in a meeting', 'on a call' | - | |
-| red     | pulsing | - | :middle_finger: | |
-| green   | solid   | __default__ | __default__ | If there is no status or one we don't trigger on the light will default green. |
-| green   | pulsing | - | - | - |
-| yellow  | solid   | 'thinking' | - | |
-| yellow  | solid   | - | :thinking_face:, :sleeping:, :shushing_face: | |
-| yellow  | pulsing | - | - | - |
+| Color  | Behavior | Slack Status Text | Slack Status Emoji | Other |
+| :----- | :------- | :---------------- | :----------------- | :---- |
+| blue   | pulsing  | - | - | trinket is connected to the go server, but not slack |
+| blue   | solid    | - | - | trinket is connected to the go server and slack |
+| red    | pulsing  | 'in a meeting', 'on a call' | :middle_finger: | |
+| red    | solid    | 'focused', 'busy' | :triangular_flag_on_post:, :red_circle:, :woman-gesturing-no:, :man-gesturing-no:, :male-technologist:, :female-technologist: | |
+| green  | pulsing  | - | - | - |
+| green  | solid    | __default__ | __default__ | If there is no status or one we don't trigger on the light will default green. |
+| yellow | pulsing  | - | - | - |
+| yellow | solid    | 'thinking' | :thinking_face:, :sleeping:, :shushing_face: | |
 
 * If there is Status Text then we ignore the Status Emoji, only if there is no Status Text do we set the light based on Status Emoji.
 
@@ -25,7 +23,7 @@ Build
 
 | Trinket M0 Front | Trinket M0 Back |
 | :-----------: | :----------: |
-| ![](assets/IMG_0842.JPG) | ![](assets/IMG_7806.JPG) |
+| ![front](assets/IMG_0842.JPG) | ![](assets/IMG_7806.JPG) |
 
 ### Components
 
@@ -70,6 +68,7 @@ Setup
 
         go get github.com/tarm/serial
         go get github.com/nlopes/slack
+        go get github.com/kyokomi/emoji
 
 2. Add Slack legacy token and user ID to server/go/main.go
 3. Compile the application
@@ -85,9 +84,67 @@ You'll want:
 - a slack api
 - ...
 
+### Algoritm
+
+1. connect to trinket
+   - look for possible devices
+   - message each until we hear a 'go away' response to our 'hey' statement
+   - if no success with any candidate retry in 10 seconds
+2. get the current status of the slack user
+   - if unsuccessful retry in 10 seconds
+3. set the trinket light based on the current status
+   - if unsuccessful reset trinket connection and try again in, no delay as the connect to trinket func will poll until device comes back online
+4. connect to the rtm client and watch for status change events
+5. set the trinket light based on the updated status
+   - if unsuccessful reset trinket connection and try again in, no delay as the connect to trinket func will poll until device comes back online
+
+
+slack
+1. get current status
+  - if unable to connect wait and try again
+  - if trinket state is connected then set color
+2. listen for status updates
+  - if status received and trinket state is connected set trinket color
+  - if disconnects start again from 1
+
+trinket
+1. look for device
+  - list possible devices
+  - for each say 'hey'
+  - if rcv 'go away' mark as it
+  - if none respond, wait and try again
+2. listen for color change requests
+3. every 5 seconds send ping to device
+  - if pong received set state as connected and carry on
+  - if no pong received close out stream and start over again at 1
+
+        blue -> not connected to go server
+        ??   -> connected to go server but not slack server
+        ____ -> connected to both go and slack servers
+
+
 References
 ----------
 
+Todo
+----
+
+- [ ] clean files, file contents, readme
+- [ ] add in retries with progressing timeouts for finding trinket
+- [ ] check for / add errors to set light func, attempt to reconnect to trinket
+- [ ] situations to handle
+      - no trinket
+      - no internet
+      - combinations of the above
+      - trinket removed
+      - internet removed
+      - combinations of the above
+- [ ] add a ping every 5 seconds and if trinket does not pong back then try to re-establish stream, can this be done with channels and goroutines??
+- [ ] refactor, simplify
+- [ ] clean up output of go application
+- [ ] write service wrapper with /var/log/donotdisturb output and log rotation
+
+!! WANT to have one active stream so we connect once?
 
 Colophon
 --------

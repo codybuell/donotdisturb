@@ -138,6 +138,8 @@ while True:
                 mode = "solid"
         elif (command.lower().startswith('hey')):
             print('go away')
+        elif (command.lower().startswith('ping')):
+            print('pong')
         print('setting',mode,'-',color)
 
     # apply the color
