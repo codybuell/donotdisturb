@@ -80,7 +80,7 @@ func runScanner() {
 // 5. If no 'go away' response after a half second close the serial port and stop the scanner, try again in 5 seconds
 // * runScanner() goroutine will be closed out when this function returns
 func findTrinket() {
-	fmt.Printf("locating trinket")
+	fmt.Println("locating trinket")
 
 	for {
 		// grab the contents of /dev
@@ -129,7 +129,6 @@ func findTrinket() {
 		}
 
 		// try again in 5 seconds
-		fmt.Printf(".")
 		time.Sleep(time.Millisecond * 5000)
 	}
 }
@@ -138,6 +137,7 @@ func monitorTrinket() {
 	go runScanner()
 	for {
 		port.Write([]byte("ping\r"))
+		fmt.Println("sending " + <-cScanner)
 		select {
 		case received := <-cScanner:
 			if received == "pong" {
@@ -230,8 +230,12 @@ func main() {
 		case trinketConnected := <-cTrinket:
 			// trinket connection has changed
 			if trinketConnected {
+				fmt.Println("trinket channel received connected state")
 				monitorTrinket()
 			} else {
+				fmt.Println("trinket channel received disconnected state")
+				port.Close()
+				cQuit <- true
 				findTrinket()
 			}
 		case <-cSlack:

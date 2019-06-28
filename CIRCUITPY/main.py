@@ -116,31 +116,35 @@ while True:
         command = input()
         if (command.lower().startswith('@')):
             mode = command[1:]
+            print('setting',mode,'-',color)
         elif (command.lower().startswith('red')):
             color = (luminosity,0,0)
             colorName = 'red'
             if (mode == "pulse"):
                 mode = "solid"
+            print('setting',mode,'-',color)
         elif (command.lower().startswith('green')):
             color = (0,luminosity,0)
             colorName = 'green'
             if (mode == "pulse"):
                 mode = "solid"
+            print('setting',mode,'-',color)
         elif (command.lower().startswith('yellow')):
             color = (luminosity,luminosity,0)
             colorName = 'yellow'
             if (mode == "pulse"):
                 mode = "solid"
+            print('setting',mode,'-',color)
         elif (command.lower().startswith('blue')):
             color = (0,0,luminosity)
             colorName = 'blue'
             if (mode == "pulse"):
                 mode = "solid"
+            print('setting',mode,'-',color)
         elif (command.lower().startswith('hey')):
             print('go away')
         elif (command.lower().startswith('ping')):
             print('pong')
-        print('setting',mode,'-',color)
 
     # apply the color
     setColor(color)
