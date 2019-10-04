@@ -52,7 +52,7 @@ Setup
 
 1. Build the hardware, see above
 2. Upload CircuitPython 4.X firmware to device
-   - Download the latest from [here](https://github.com/adafruit/circuitpython/releases), it's a large page... search for 'trinket_m0-en_US'
+   - Download the latest from [here](https://circuitpython.org/board/trinket_m0/), the large 'DOWNLOAD .UF2 NOW' button
    - Plug in and backup any existing projects on your Trinket M0
    - Double click the Trinket's reset button to enter bootloader mode, the red light will flash and a new drive titled TRINKETBOOT will be mounted
    - Place the downloaded UF2 file into this newly mounted drive, it will automatically be applied and the device will reset
