@@ -88,7 +88,7 @@ You'll want:
 
 OAuth Tokens
 ----------
-It's possible to use OAuth Tokens in Slack App [instead of a Legacy Token](https://github.com/nlopes/slack/issues/184).  Using the bot and users.profile OAuth Scopes, it's possible to generate an access token which functions similarly to the Legacy Token but with more tailored permissions. To achieve this you'll need to:
+It's possible to use OAuth Tokens in Slack App [instead of a Legacy Token](https://github.com/nlopes/slack/issues/184).  Using the bot and users.profile OAuth Scopes, the access token functions similarly to the Legacy Token but with more tailored permissions. To achieve this you'll need to:
 
 1. Create a [Slack App](https://api.slack.com/apps)  
 2. Add the bot and users.profile:read [OAuth Scopes](https://api.slack.com/docs/presence-and-status)
