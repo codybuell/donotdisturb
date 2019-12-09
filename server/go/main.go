@@ -13,8 +13,8 @@ import (
 )
 
 const (
-	slackUserID      = "YOURUSERID"
-	slackLegacyToken = "YOURLEGACYTOKEN"
+	slackUserID = "YOURUSERID"
+	slackToken  = "YOURLEGACYTOKEN"
 )
 
 func initializePort(path string) *serial.Port {
@@ -110,7 +110,7 @@ func main() {
 
 	// establish our slack connection, generate a legacy user token for this connection
 	api := slack.New(
-		slackLegacyToken,
+		slackToken,
 		slack.OptionDebug(false),
 		slack.OptionLog(log.New(os.Stdout, "slack-bot: ", log.Lshortfile|log.LstdFlags)),
 	)
