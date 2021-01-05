@@ -32,18 +32,50 @@ light = AnalogIn(board.A0)
 #  helpers  #
 #############
 
-# convert analog input to voltage
 def getVoltage(pin):
+    """ Get Voltage
+
+    Get the current voltage reading from the specified pin. The analog pin is
+    16 bits, meaning it will return a value in the range of 0 - 65535. Here we
+    take that value and convert it to a voltage that is based on the boards
+    range of 0 - 3.3V.
+
+    Args:
+        pin (AnalogIn): the target pin
+
+    Returns:
+        float: current voltage of pin
+    """
     return (pin.value * 3.3) / 65536
 
-# set the led colors
 def setColor(color):
-    # improve to accept hex ie 0x333333
+    """ Set Color
+
+    Sets the dotstar and RGB led colors.
+
+    Args:
+        color (tuple|hex): color to set, eg (0, 0, 40) or 0x333333, takes 8 bit
+                           values, eg 0-255, 00-ff for tuple, hex respectively.
+
+    Returns:
+        None
+    """
     brddot[0] = color
     rgbled.color = color
 
-# set luminosity based on ambient light level
 def setLuminosity():
+    """ Set Luminosity
+
+    Set the luminosity based on ambient light levels. This takes a reading from
+    our photoresistor and returns a stepped luminosity int and pulse timeout
+    float used to generate the led color values.
+
+    Args:
+        None
+
+    Returns:
+        int, float: luminosity, pulseTimeout
+    """
     voltageIndex = int(getVoltage(light))
 
     if voltageIndex == 0:
@@ -60,15 +92,26 @@ def setLuminosity():
         pulseTimeout = 0.01
     return luminosity, pulseTimeout
 
-
-# tuples are immutable, helper to convert to list, replace then convert back
 def replace(tup, x, y):
-   tup_list = list(tup)
-   for element in tup_list:
-      if element == x:
-         tup_list[tup_list.index(element)] = y
-   new_tuple = tuple(tup_list)
-   return new_tuple
+    """ Replace
+
+    Tuples are immutable, helper to convert to list, replace then convert back
+    for pulsing led colors.
+
+    Args:
+        color (tuple):
+        luminosity (int):
+        newbrightness (int):
+
+    Returns:
+        tuple: the new color to set
+    """
+    tup_list = list(tup)
+    for element in tup_list:
+       if element == x:
+          tup_list[tup_list.index(element)] = y
+    new_tuple = tuple(tup_list)
+    return new_tuple
 
 #####################
 #  initializations  #
