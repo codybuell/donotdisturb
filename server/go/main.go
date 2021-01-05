@@ -12,10 +12,8 @@ import (
 	"github.com/tarm/serial"
 )
 
-const (
-	slackUserID = "YOURUSERID"
-	slackToken  = "YOURLEGACYTOKEN"
-)
+var slackUserID string
+var slackToken string
 
 func initializePort(path string) *serial.Port {
 	c := new(serial.Config)
