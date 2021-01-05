@@ -2,12 +2,13 @@
 #  imports  #
 #############
 
-import pulseio
 import time
 import board
+import pulseio
+import supervisor
 import adafruit_rgbled
 import adafruit_dotstar as dotstar
-import supervisor
+
 from analogio import AnalogIn
 
 ####################
