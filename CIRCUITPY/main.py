@@ -100,11 +100,11 @@ while True:
 
     # if luminosity has changed reset the color!
     if (oldluminosity != luminosity):
-        if (colorName == 'red'):
+        if colorName == 'red':
             color = (luminosity,0,0)
-        if (colorName == 'green'):
+        if colorName == 'green':
             color = (0,luminosity,0)
-        if (colorName == 'yellow'):
+        if colorName == 'yellow':
             color = (luminosity,luminosity,0)
 
     # grab the new luminosity value so we can compare it next loop
@@ -115,29 +115,29 @@ while True:
     # as a second input to change to a pulse
     if supervisor.runtime.serial_bytes_available:
         command = input()
-        if (command.lower().startswith('@')):
+        if command.lower().startswith('@'):
             mode = command[1:]
-        elif (command.lower().startswith('red')):
+        elif command.lower().startswith('red'):
             color = (luminosity,0,0)
             colorName = 'red'
             if (mode == "pulse"):
                 mode = "solid"
-        elif (command.lower().startswith('green')):
+        elif command.lower().startswith('green'):
             color = (0,luminosity,0)
             colorName = 'green'
             if (mode == "pulse"):
                 mode = "solid"
-        elif (command.lower().startswith('yellow')):
+        elif command.lower().startswith('yellow'):
             color = (luminosity,luminosity,0)
             colorName = 'yellow'
             if (mode == "pulse"):
                 mode = "solid"
-        elif (command.lower().startswith('blue')):
+        elif command.lower().startswith('blue'):
             color = (0,0,luminosity)
             colorName = 'blue'
             if (mode == "pulse"):
                 mode = "solid"
-        elif (command.lower().startswith('hey')):
+        elif command.lower().startswith('hey'):
             print('go away')
         print('setting',mode,'-',color)
 
@@ -145,7 +145,7 @@ while True:
     setColor(color)
 
     # if in pulse mode cycle one pulse
-    if (mode == "pulse"):
+    if mode == "pulse":
         length = luminosity * 2
         for i in range(length):
             time.sleep(pulseTimeout)
