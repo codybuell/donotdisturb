@@ -157,30 +157,30 @@ while True:
     # setting a color will default to solid, you must follow with a mode
     # as a second input to change to a pulse
     if supervisor.runtime.serial_bytes_available:
-        command = input()
-        if command.lower().startswith('@'):
+        command = input().lower()
+        if command.startswith('@'):
             mode = command[1:]
-        elif command.lower().startswith('red'):
+        elif command.startswith('red'):
             color = (luminosity,0,0)
             colorName = 'red'
             if (mode == "pulse"):
                 mode = "solid"
-        elif command.lower().startswith('green'):
+        elif command.startswith('green'):
             color = (0,luminosity,0)
             colorName = 'green'
             if (mode == "pulse"):
                 mode = "solid"
-        elif command.lower().startswith('yellow'):
+        elif command.startswith('yellow'):
             color = (luminosity,luminosity,0)
             colorName = 'yellow'
             if (mode == "pulse"):
                 mode = "solid"
-        elif command.lower().startswith('blue'):
+        elif command.startswith('blue'):
             color = (0,0,luminosity)
             colorName = 'blue'
             if (mode == "pulse"):
                 mode = "solid"
-        elif command.lower().startswith('hey'):
+        elif command.startswith('hey'):
             print('go away')
         print('setting',mode,'-',color)
 
